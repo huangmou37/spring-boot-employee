@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Company;
 import com.example.demo.entity.Employee;
+import com.example.demo.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +17,12 @@ import java.util.List;
 @RestController
 public class CompanyController {
 
+  @Autowired
+  private CompanyService companyService;
+
   @GetMapping("/companies")
   public List<Company> getAllCompanies() {
-    return null;
+    return companyService.getAllCompanies();
   }
 
   @GetMapping("/companies?page={page}&pageSize={pageSize}")
@@ -36,8 +41,8 @@ public class CompanyController {
   }
 
   @PostMapping("/companies")
-  public void addCompany(@RequestBody Company company) {
-    return;
+  public Company addCompany(@RequestBody Company company) {
+    return companyService.addCompany(company);
   }
 
   @PutMapping("/companies")
