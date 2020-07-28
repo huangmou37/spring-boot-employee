@@ -36,4 +36,16 @@ public class CompanyServiceTest {
     // then
     assertEquals(5, companies.size());
   }
+
+  @Test
+  void should_return_0_companies_when_get_all_companies_given_company_repository_with_0_companies() {
+    // given
+    Mockito.when(companyRepository.findAll()).thenReturn(new ArrayList<>());
+
+    // when
+    List<Company> companies = companyService.getAllCompanies();
+
+    // then
+    assertEquals(0, companies.size());
+  }
 }
